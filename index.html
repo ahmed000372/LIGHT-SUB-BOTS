@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIGHT-BOT - ربط البوت</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0b0b12;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+        .neon-card {
+            background: #12121c;
+            border: 2px solid #8b5cf6;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+        }
+        .inner-card {
+            background: #181824;
+            border: 1px solid #2e2b45;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <!-- Card Container -->
+    <div class="max-w-md w-full neon-card rounded-3xl p-6 text-center space-y-5">
+        
+        <!-- Profile Image -->
+        <div class="relative w-28 h-28 mx-auto">
+            <img src="https://i.supaimg.com/374589ce-56ae-4068-ba73-60f3b228637f/df4a4068-978a-4f77-afa8-bb5dd22968e1.jpg" 
+                 class="w-full h-full rounded-full border-4 border-cyan-400 object-cover shadow-lg">
+        </div>
+
+        <!-- Bot Title -->
+        <div>
+            <h1 class="text-3xl font-bold text-red-600 tracking-wider">LIGHT-BOT</h1>
+            <p class="text-red-400 text-sm mt-1">جيب الكود ديال الربط وربط البوت</p>
+        </div>
+
+        <!-- Inner Form Box -->
+        <div class="inner-card rounded-2xl p-5 text-right space-y-4">
+            
+            <!-- Phone Input -->
+            <div>
+                <label class="text-slate-200 text-sm font-semibold flex items-center gap-1 mb-2">
+                    📱 النمرة ديال الواتساب
+                </label>
+                <input type="tel" id="phoneInput" placeholder="مثال: 2189457××××××" 
+                       class="w-full px-4 py-3 bg-[#0d0d14] text-slate-300 border border-slate-700 rounded-xl focus:outline-none focus:border-purple-500 text-center text-lg dir-ltr placeholder-slate-500">
+            </div>
+
+            <!-- Server Select -->
+            <div>
+                <label class="text-slate-200 text-sm font-semibold flex items-center gap-1 mb-2">
+                    💻 ختار السيرفر
+                </label>
+                <select class="w-full px-4 py-3 bg-[#0d0d14] text-slate-200 border border-slate-700 rounded-xl focus:outline-none focus:border-purple-500">
+                    <option value="1">السيرفر 1 - ليبيا 🇱🇾</option>
+                </select>
+            </div>
+
+            <!-- Get Code Button -->
+            <button onclick="requestCode()" id="submitBtn" 
+                    class="w-full py-3.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold text-lg rounded-xl shadow-lg transition duration-200 flex items-center justify-center gap-2">
+                جيب كود الربط 🔑
+            </button>
+
+            <!-- Join Groups Button -->
+            <a href="https://chat.whatsapp.com/D3TD0OUJcApJJ1NMTtDXzj" target="_blank" 
+               class="w-full py-3.5 bg-gradient-to-r from-fuchsia-600 to-pink-600 hover:from-fuchsia-700 hover:to-pink-700 text-white font-bold text-lg rounded-xl shadow-lg transition duration-200 flex items-center justify-center gap-2 block text-center">
+                دخول المجموعات 👥
+            </a>
+
+            <!-- Contact Developer Button -->
+            <a href="https://wa.me/218945778513" target="_blank" 
+               class="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-bold text-lg rounded-xl shadow-lg transition duration-200 flex items-center justify-center gap-2 block text-center">
+                تواصل مع المطور 📞
+            </a>
+
+            <!-- Result Box -->
+            <div id="resultBox" class="hidden space-y-3 p-4 bg-[#0d0d14] rounded-xl border border-purple-500/50 mt-4 text-center">
+                <p class="text-xs text-slate-400">كود الاقتران الخاص بك:</p>
+                <div id="codeDisplay" class="text-3xl font-mono font-bold text-purple-400 select-all tracking-wider">--------</div>
+                <button onclick="copyCode()" class="px-4 py-2 bg-purple-900/60 hover:bg-purple-800 text-xs text-purple-200 rounded-lg border border-purple-500/40 transition">
+                    نسخ الكود 📋
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="text-slate-500 text-xs space-y-1">
+            <p>المطور: <span class="text-slate-400 font-bold">LIGHT-BOT</span></p>
+            <p>LIGHT 2026 ©</p>
+        </div>
+
+    </div>
+
+    <script>
+        // رابط سيرفرك في HidenCloud
+        const SERVER_URL = "http://june.hidencloud.com:24638";
+
+        async function requestCode() {
+            const phone = document.getElementById('phoneInput').value.trim();
+            const resultBox = document.getElementById('resultBox');
+            const codeDisplay = document.getElementById('codeDisplay');
+            const submitBtn = document.getElementById('submitBtn');
+
+            if (!phone) {
+                alert('يرجى إدخال رقم الواتساب أولاً');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerText = "جاري طلب الكود... ⏳";
+
+            try {
+                const response = await fetch(`${SERVER_URL}/pair?number=${encodeURIComponent(phone)}`);
+                const data = await response.json();
+
+                if (data.code) {
+                    codeDisplay.innerText = data.code;
+                    resultBox.classList.remove('hidden');
+                } else {
+                    alert(data.error || 'حدث خطأ أثناء طلب الكود');
+                }
+            } catch (err) {
+                alert('فشل الاتصال بالسيرفر، تأكد من تشغيل البوت!');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "جيب كود الربط 🔑";
+            }
+        }
+
+        function copyCode() {
+            const code = document.getElementById('codeDisplay').innerText;
+            navigator.clipboard.writeText(code);
+            alert('تم نسخ الكود بنجاح!');
+        }
+    </script>
+
+</body>
+</html>
