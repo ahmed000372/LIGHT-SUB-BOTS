@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIGHT-BOT - نظام الاقتران</title>
+    <title>تنصيب لايت بوت</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -25,7 +25,7 @@
             overflow-x: hidden;
         }
 
-        /* خلفية الفيديو */
+        /* خلفية فيديو Catbox */
         .video-bg {
             position: fixed;
             top: 0;
@@ -34,17 +34,17 @@
             height: 100vh;
             object-fit: cover;
             z-index: -2;
-            filter: brightness(0.3) contrast(1.1);
+            filter: brightness(0.4) contrast(1.15);
         }
 
-        /* طبقة التظليل */
+        /* طبقة التظليل فوق الفيديو */
         .overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: radial-gradient(circle, rgba(15,2,2,0.3) 0%, rgba(5,5,8,0.85) 100%);
+            background: radial-gradient(circle, rgba(15,2,2,0.2) 0%, rgba(5,5,8,0.85) 100%);
             z-index: -1;
         }
 
@@ -87,13 +87,24 @@
         .light-title {
             text-shadow: 0 0 15px rgba(239, 68, 68, 0.8);
         }
+
+        /* تعديل خانة الإدخال لتظهر بشكل مظبوط */
+        #phoneInput {
+            direction: ltr;
+            text-align: center;
+        }
+        #phoneInput::placeholder {
+            direction: rtl;
+            text-align: center;
+        }
     </style>
 </head>
 <body class="p-4">
 
-    <!-- فيديو الخلفية -->
-    <video class="video-bg" autoplay loop muted playsinline>
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-red-abstract-tunnel-loop-41564-large.mp4" type="video/mp4">
+    <!-- فيديو الخلفية من رابط Catbox -->
+    <video class="video-bg" autoplay loop muted playsinline preload="auto">
+        <source src="https://files.catbox.moe/uee4x1.mp4" type="video/mp4">
+        متصفحك لا يدعم تشغيل الفيديو.
     </video>
     <div class="overlay"></div>
 
@@ -121,8 +132,8 @@
                 <label class="text-red-300 text-xs font-bold flex items-center gap-1.5 mb-2">
                     <i class="fa-solid fa-mobile-screen-button text-red-500"></i> ادخل رقم الهاتف الخاص بك
                 </label>
-                <input type="tel" id="phoneInput" placeholder="مثال: 2189457××××××" 
-                       class="w-full px-4 py-3 bg-[#08060a] text-red-100 border border-red-900/60 rounded-xl focus:outline-none focus:border-red-500 text-center text-lg dir-ltr placeholder-gray-600 font-mono">
+                <input type="tel" id="phoneInput" placeholder="2189457XXXXXX" 
+                       class="w-full px-4 py-3 bg-[#08060a] text-red-100 border border-red-900/60 rounded-xl focus:outline-none focus:border-red-500 text-lg placeholder-gray-600 font-mono tracking-wider">
             </div>
 
             <!-- الزر الوحيد -->
@@ -143,9 +154,8 @@
         </div>
 
         <!-- التذييل -->
-        <div class="text-gray-500 text-xs space-y-1">
-            <p>المطور: <span class="text-red-400 font-bold">LIGHT-BOT | Ahmed</span></p>
-            <p>جميع الحقوق محفوظة © LIGHT 2026</p>
+        <div class="text-gray-400 text-xs space-y-1">
+            <p>المطور: <span class="text-red-500 font-bold">Ahmed</span></p>
         </div>
 
     </div>
