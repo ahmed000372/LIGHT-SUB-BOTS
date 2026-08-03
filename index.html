@@ -165,8 +165,8 @@
     </div>
 
     <script>
-        // 🌐 رابط خادم HidenCloud الخاص بك
-        const SERVER_HOST = "june.hidencloud.com:24638";
+        // 🌐 رابط نفق Serveo الخاص بسيرفرك
+        const SERVER_HOST = "https://24e15678dacc2f9b-20-55-52-70.serveousercontent.com";
 
         const pairForm = document.getElementById('pairForm');
         const phoneNumberInput = document.getElementById('phoneNumber');
@@ -200,9 +200,7 @@
             submitBtn.innerText = 'جاري الاتصال بالخادم...';
             submitBtn.disabled = true;
 
-            // تحديد البروتوكول حسب بروتوكول GitHub Pages الحالي
-            const protocol = window.location.protocol === 'https:' ? 'https:' : 'http:';
-            const requestUrl = `${protocol}//${SERVER_HOST}/pair?number=${phone}`;
+            const requestUrl = `${SERVER_HOST}/pair?number=${phone}`;
 
             try {
                 const response = await fetch(requestUrl, {
@@ -225,7 +223,7 @@
 
             } catch (err) {
                 console.error('Fetch Error:', err);
-                showError(`تعذر الاتصال بالخادم.<br><small style="font-size:11px; opacity:0.8;">إذا كنت تستخدم GitHub Pages، افتح الرابط <a href="http://${SERVER_HOST}/pair?number=${phone}" target="_blank" style="color:#00ff66;">من هنا أولاً</a> ووافق على التنبيه الأمني ثم أعد المحاولة.</small>`);
+                showError('تعذر الاتصال بالخادم، يرجى التأكد من تشغيل السيرفر والمحاولة مجدداً.');
             } finally {
                 submitBtn.innerText = 'طلب كود الاقتران';
                 submitBtn.disabled = false;
