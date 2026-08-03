@@ -3,95 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 🟢 تم تغيير العنوان هنا -->
     <title>تنصيب لايت بوت</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: system-ui, -apple-system, sans-serif;
-            background-color: #050508;
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow-x: hidden;
-        }
-
-        /* الكارت الرئيسي الأحمر */
-        .main-card {
-            background: rgba(18, 12, 20, 0.95);
-            backdrop-filter: blur(16px);
-            border: 2px solid #ef4444;
-            box-shadow: 0 0 35px rgba(239, 68, 68, 0.4), inset 0 0 15px rgba(239, 68, 68, 0.2);
-            width: 100%;
-            max-width: 420px;
-        }
-
-        /* المربع الأحمر المضيء المحتوي على الفيديو */
-        .avatar-red-box {
-            width: 110px;
-            height: 110px;
-            border: 3px solid #ef4444;
-            box-shadow: 0 0 20px #ef4444, inset 0 0 10px #ef4444;
-            animation: pulseGlow 2s infinite alternate;
-            overflow: hidden; /* لحصر الفيديو داخل المربع تماماً */
-            border-radius: 1rem;
-        }
-
-        .avatar-red-box video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        @keyframes pulseGlow {
-            0% {
-                box-shadow: 0 0 10px #ef4444, inset 0 0 5px #ef4444;
-                border-color: #ef4444;
-            }
-            100% {
-                box-shadow: 0 0 25px #dc2626, inset 0 0 12px #dc2626;
-                border-color: #f87171;
-            }
-        }
-
-        /* الصندوق الداخلي */
-        .inner-card {
-            background: rgba(10, 8, 15, 0.9);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-        }
-
-        .light-title {
-            text-shadow: 0 0 15px rgba(239, 68, 68, 0.8);
-        }
-
-        /* ضبط خانة رقم الهاتف */
-        #phoneInput {
-            direction: ltr;
-            text-align: center;
-        }
-        #phoneInput::placeholder {
-            direction: rtl;
-            text-align: center;
-        }
-    </style>
-</head>
-<body class="p-4">
-
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIGHT YAGAMI BOT | طلب كود الاقتران</title>
     <style>
         * {
             box-sizing: border-box;
@@ -121,7 +34,8 @@
             text-align: center;
         }
 
-        .avatar {
+        /* 🎥 مشغل الفيديو */
+        .video-avatar {
             width: 130px;
             height: 130px;
             border-radius: 20px;
@@ -141,13 +55,6 @@
         .input-group {
             margin-bottom: 15px;
             text-align: right;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: #b3b3b3;
         }
 
         input[type="tel"] {
@@ -233,20 +140,24 @@
 <body>
 
     <div class="card">
-        <!-- صورة البوت -->
-        <img src="https://i.supaimg.com/374589ce-56ae-4068-ba73-60f3b228637f/0b22c6a0-3522-4e3d-b1b8-120642cb25b2.jpg" alt="Light Yagami Bot" class="avatar">
+        <!-- 🎥 الفيديو الخاص بالبوت -->
+        <video class="video-avatar" autoplay loop muted playsinline>
+            <source src="https://files.catbox.moe/3kxthy.mp4" type="video/mp4">
+            متصفحك لا يدعم تشغيل الفيديو.
+        </video>
         
         <div class="title">ربط البوت عبر كود الاقتران</div>
 
         <form id="pairForm">
             <div class="input-group">
-                <input type="tel" id="phoneNumber" placeholder="مثال: 201234567890" required autocomplete="off">
+                <!-- 🟢 تم تعديل الـ placeholder أدناه -->
+                <input type="tel" id="phoneNumber" placeholder="21894577××××××" required autocomplete="off">
             </div>
 
-            <!-- ⚠️ هنا تظهر كافة رسائل الأخطاء بدلاً من الـ Alert -->
+            <!-- ⚠️ رسائل الأخطاء في الصفحة -->
             <div id="errorMessage" class="error-message"></div>
 
-            <!-- 🟢 هنا يظهر كود الاقتران عند النجاح -->
+            <!-- 🟢 عرض كود الاقتران -->
             <div id="codeContainer" class="code-container">
                 <div style="font-size: 12px; color: #aaa; margin-bottom: 5px;">كود الاقتران الخاص بك:</div>
                 <div id="pairCode" class="code-text">------</div>
@@ -268,20 +179,17 @@
         const pairCodeDisplay = document.getElementById('pairCode');
         const submitBtn = document.getElementById('submitBtn');
 
-        // دالة لإظهار الخطأ داخل الصفحة
         function showError(msg) {
             codeContainer.style.display = 'none';
             errorMessage.innerText = msg;
             errorMessage.style.display = 'block';
         }
 
-        // دالة لإخفاء الخطأ
         function hideError() {
             errorMessage.style.display = 'none';
             errorMessage.innerText = '';
         }
 
-        // عند إرسال النموذج
         pairForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             hideError();
@@ -293,12 +201,10 @@
                 return;
             }
 
-            // تعطيل الزر مؤقتاً أثناء الإرسال
             submitBtn.innerText = 'جاري الاتصال بالخادم...';
             submitBtn.disabled = true;
 
             try {
-                // استبدل الرابط أدناه برابط سيرفرك الخاص بالاقتران
                 const response = await fetch(`/pair?number=${phone}`, {
                     method: 'GET',
                     headers: { 'Content-Type': 'application/json' }
@@ -318,7 +224,6 @@
                 }
 
             } catch (err) {
-                // عرض خطأ الاتصال بالخادم في الصفحة فوراً
                 showError('تعذر الاتصال بالخادم، يرجى التأكد من تشغيل البوت.');
             } finally {
                 submitBtn.innerText = 'طلب كود الاقتران';
