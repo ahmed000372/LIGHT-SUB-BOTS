@@ -165,8 +165,8 @@
     </div>
 
     <script>
-        // 🌐 رابط نفق Serveo الخاص بسيرفرك
-        const SERVER_HOST = "https://24e15678dacc2f9b-20-55-52-70.serveousercontent.com";
+        // 🌐 رابط خادم HidenCloud الخاص بك ومباشر من المنصة
+        const SERVER_HOST = "june.hidencloud.com:24638";
 
         const pairForm = document.getElementById('pairForm');
         const phoneNumberInput = document.getElementById('phoneNumber');
@@ -200,7 +200,7 @@
             submitBtn.innerText = 'جاري الاتصال بالخادم...';
             submitBtn.disabled = true;
 
-            const requestUrl = `${SERVER_HOST}/pair?number=${phone}`;
+            const requestUrl = `http://${SERVER_HOST}/pair?number=${phone}`;
 
             try {
                 const response = await fetch(requestUrl, {
@@ -223,7 +223,7 @@
 
             } catch (err) {
                 console.error('Fetch Error:', err);
-                showError('تعذر الاتصال بالخادم، يرجى التأكد من تشغيل السيرفر والمحاولة مجدداً.');
+                showError(`تعذر الاتصال بالخادم.<br><small style="font-size:11px; opacity:0.8;">إذا واجهتك مشكلة، افتح <a href="http://${SERVER_HOST}/pair?number=${phone}" target="_blank" style="color:#00ff66;">هذا الرابط المباشر</a> ووافق عليه، ثم أعد المحاولة.</small>`);
             } finally {
                 submitBtn.innerText = 'طلب كود الاقتران';
                 submitBtn.disabled = false;
