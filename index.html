@@ -33,7 +33,6 @@
             text-align: center;
         }
 
-        /* 🎥 مشغل الفيديو */
         .video-avatar {
             width: 130px;
             height: 130px;
@@ -74,7 +73,6 @@
             border-color: #ff1a1a;
         }
 
-        /* ⚠️ رسالة الخطأ المباشرة تحت الإدخال */
         .error-message {
             display: none;
             background-color: rgba(255, 26, 26, 0.1);
@@ -88,7 +86,6 @@
             line-height: 1.4;
         }
 
-        /* 🟢 منطقة عرض كود الاقتران */
         .code-container {
             display: none;
             margin-top: 15px;
@@ -140,7 +137,6 @@
 <body>
 
     <div class="card">
-        <!-- 🎥 الفيديو الخاص بالبوت -->
         <video class="video-avatar" autoplay loop muted playsinline>
             <source src="https://files.catbox.moe/uee4x1.mp4" type="video/mp4">
             متصفحك لا يدعم تشغيل الفيديو.
@@ -153,10 +149,8 @@
                 <input type="tel" id="phoneNumber" placeholder="21894577××××××" required autocomplete="off">
             </div>
 
-            <!-- ⚠️ رسائل الأخطاء في الصفحة -->
             <div id="errorMessage" class="error-message"></div>
 
-            <!-- 🟢 عرض كود الاقتران -->
             <div id="codeContainer" class="code-container">
                 <div style="font-size: 12px; color: #aaa; margin-bottom: 5px;">كود الاقتران الخاص بك:</div>
                 <div id="pairCode" class="code-text">------</div>
@@ -171,8 +165,8 @@
     </div>
 
     <script>
-        // 🌐 رابط سيرفرك المباشر في HidenCloud
-        const SERVER_URL = "http://june.hidencloud.com:24638";
+        // 🌐 رابط خادم HidenCloud الخاص بك
+        const SERVER_HOST = "june.hidencloud.com:24638";
 
         const pairForm = document.getElementById('pairForm');
         const phoneNumberInput = document.getElementById('phoneNumber');
@@ -183,7 +177,7 @@
 
         function showError(msg) {
             codeContainer.style.display = 'none';
-            errorMessage.innerText = msg;
+            errorMessage.innerHTML = msg;
             errorMessage.style.display = 'block';
         }
 
@@ -206,9 +200,12 @@
             submitBtn.innerText = 'جاري الاتصال بالخادم...';
             submitBtn.disabled = true;
 
+            // تحديد البروتوكول حسب بروتوكول GitHub Pages الحالي
+            const protocol = window.location.protocol === 'https:' ? 'https:' : 'http:';
+            const requestUrl = `${protocol}//${SERVER_HOST}/pair?number=${phone}`;
+
             try {
-                // الاتصال المباشر بالسيرفر عبر الرابط المحدد
-                const response = await fetch(`${SERVER_URL}/pair?number=${phone}`, {
+                const response = await fetch(requestUrl, {
                     method: 'GET',
                     headers: { 'Content-Type': 'application/json' }
                 });
@@ -227,8 +224,8 @@
                 }
 
             } catch (err) {
-                console.error(err);
-                showError('تعذر الاتصال بالخادم، يرجى التأكد من تشغيل البوت.');
+                console.error('Fetch Error:', err);
+                showError(`تعذر الاتصال بالخادم.<br><small style="font-size:11px; opacity:0.8;">إذا كنت تستخدم GitHub Pages، افتح الرابط <a href="http://${SERVER_HOST}/pair?number=${phone}" target="_blank" style="color:#00ff66;">من هنا أولاً</a> ووافق على التنبيه الأمني ثم أعد المحاولة.</small>`);
             } finally {
                 submitBtn.innerText = 'طلب كود الاقتران';
                 submitBtn.disabled = false;
