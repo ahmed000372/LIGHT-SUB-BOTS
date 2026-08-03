@@ -86,98 +86,245 @@
 </head>
 <body class="p-4">
 
-    <!-- الكارت الرئيسي للموقع -->
-    <div class="main-card rounded-3xl p-6 text-center space-y-6">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIGHT YAGAMI BOT | طلب كود الاقتران</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0d0d0d;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #141414;
+            border: 1.5px solid #8b0000;
+            box-shadow: 0 0 20px rgba(139, 0, 0, 0.4);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 400px;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .avatar {
+            width: 130px;
+            height: 130px;
+            border-radius: 20px;
+            border: 2px solid #ff1a1a;
+            box-shadow: 0 0 15px rgba(255, 26, 26, 0.5);
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e6e6e6;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: right;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #b3b3b3;
+        }
+
+        input[type="tel"] {
+            width: 100%;
+            padding: 14px;
+            background-color: #1f1f1f;
+            border: 1px solid #333333;
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 16px;
+            direction: ltr;
+            text-align: center;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="tel"]:focus {
+            border-color: #ff1a1a;
+        }
+
+        /* ⚠️ رسالة الخطأ المباشرة تحت الإدخال */
+        .error-message {
+            display: none;
+            background-color: rgba(255, 26, 26, 0.1);
+            border: 1px solid #ff1a1a;
+            color: #ff4d4d;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-top: 10px;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        /* 🟢 منطقة عرض كود الاقتران */
+        .code-container {
+            display: none;
+            margin-top: 15px;
+            background-color: #1a1a1a;
+            border: 1px dashed #00ff66;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .code-text {
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            color: #00ff66;
+            margin-bottom: 8px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #8b0000, #4a0000);
+            border: none;
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #ff1a1a, #8b0000);
+            box-shadow: 0 0 10px rgba(255, 26, 26, 0.5);
+        }
+
+        .footer {
+            margin-top: 25px;
+            font-size: 13px;
+            color: #666666;
+        }
+
+        .footer span {
+            color: #ff1a1a;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <!-- صورة البوت -->
+        <img src="https://i.supaimg.com/374589ce-56ae-4068-ba73-60f3b228637f/0b22c6a0-3522-4e3d-b1b8-120642cb25b2.jpg" alt="Light Yagami Bot" class="avatar">
         
-        <!-- الفيديو محصور تماماً داخل المربع الأحمر -->
-        <div class="avatar-red-box mx-auto p-0 flex items-center justify-center">
-            <video autoplay loop muted playsinline preload="auto">
-                <source src="https://files.catbox.moe/uee4x1.mp4" type="video/mp4">
-            </video>
-        </div>
+        <div class="title">ربط البوت عبر كود الاقتران</div>
 
-        <!-- العنوان -->
-        <div>
-            <h1 class="text-3xl font-black text-red-500 tracking-wider light-title">LIGHT-BOT</h1>
-            <p class="text-gray-300 text-sm mt-1.5 font-medium">احصل على كود الاقتران لربط البوت بسهولة</p>
-        </div>
-
-        <!-- المدخلات -->
-        <div class="inner-card rounded-2xl p-5 text-right space-y-4">
-            
-            <!-- رقم الهاتف -->
-            <div>
-                <label class="text-red-300 text-xs font-bold flex items-center gap-1.5 mb-2">
-                    <i class="fa-solid fa-mobile-screen-button text-red-500"></i> ادخل رقم الهاتف الخاص بك
-                </label>
-                <input type="tel" id="phoneInput" placeholder="2189457XXXXXX" 
-                       class="w-full px-4 py-3 bg-[#08060a] text-red-100 border border-red-900/60 rounded-xl focus:outline-none focus:border-red-500 text-lg placeholder-gray-600 font-mono tracking-wider">
+        <form id="pairForm">
+            <div class="input-group">
+                <input type="tel" id="phoneNumber" placeholder="مثال: 201234567890" required autocomplete="off">
             </div>
 
-            <!-- الزر الوحيد -->
-            <button onclick="requestCode()" id="submitBtn" 
-                    class="w-full py-3.5 bg-gradient-to-r from-red-700 via-red-600 to-rose-700 hover:from-red-800 hover:to-rose-800 text-white font-bold text-base rounded-xl shadow-lg transition duration-200 flex items-center justify-center gap-2 border border-red-500/30">
-                <i class="fa-solid fa-key"></i> طلب كود الاقتران
-            </button>
+            <!-- ⚠️ هنا تظهر كافة رسائل الأخطاء بدلاً من الـ Alert -->
+            <div id="errorMessage" class="error-message"></div>
 
-            <!-- نتيجة الكود -->
-            <div id="resultBox" class="hidden space-y-3 p-4 bg-[#08060a] rounded-xl border border-red-600/50 mt-4 text-center">
-                <p class="text-xs text-gray-400">رمز الاقتران الخاص بك هو:</p>
-                <div id="codeDisplay" class="text-3xl font-mono font-bold text-red-500 select-all tracking-widest">--------</div>
-                <button onclick="copyCode()" class="px-4 py-2 bg-red-950/80 hover:bg-red-900 text-xs text-red-200 rounded-lg border border-red-600/40 transition">
-                    نسخ الرمز <i class="fa-regular fa-copy mr-1"></i>
-                </button>
+            <!-- 🟢 هنا يظهر كود الاقتران عند النجاح -->
+            <div id="codeContainer" class="code-container">
+                <div style="font-size: 12px; color: #aaa; margin-bottom: 5px;">كود الاقتران الخاص بك:</div>
+                <div id="pairCode" class="code-text">------</div>
             </div>
 
-        </div>
+            <button type="submit" id="submitBtn" class="btn">طلب كود الاقتران</button>
+        </form>
 
-        <!-- التذييل -->
-        <div class="text-gray-400 text-xs space-y-1">
-            <p>المطور: <span class="text-red-500 font-bold">Ahmed</span></p>
+        <div class="footer">
+            المطور: <span>Ahmed</span>
         </div>
-
     </div>
 
     <script>
-        const SERVER_URL = "http://june.hidencloud.com:24638";
+        const pairForm = document.getElementById('pairForm');
+        const phoneNumberInput = document.getElementById('phoneNumber');
+        const errorMessage = document.getElementById('errorMessage');
+        const codeContainer = document.getElementById('codeContainer');
+        const pairCodeDisplay = document.getElementById('pairCode');
+        const submitBtn = document.getElementById('submitBtn');
 
-        async function requestCode() {
-            const phone = document.getElementById('phoneInput').value.trim();
-            const resultBox = document.getElementById('resultBox');
-            const codeDisplay = document.getElementById('codeDisplay');
-            const submitBtn = document.getElementById('submitBtn');
+        // دالة لإظهار الخطأ داخل الصفحة
+        function showError(msg) {
+            codeContainer.style.display = 'none';
+            errorMessage.innerText = msg;
+            errorMessage.style.display = 'block';
+        }
+
+        // دالة لإخفاء الخطأ
+        function hideError() {
+            errorMessage.style.display = 'none';
+            errorMessage.innerText = '';
+        }
+
+        // عند إرسال النموذج
+        pairForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            hideError();
+
+            const phone = phoneNumberInput.value.trim().replace(/[^0-9]/g, '');
 
             if (!phone) {
-                alert('يرجى إدخال رقم الهاتف أولاً.');
+                showError('يرجى كتابة رقم الهاتف بشكل صحيح بدون رموز أو فواصل.');
                 return;
             }
 
+            // تعطيل الزر مؤقتاً أثناء الإرسال
+            submitBtn.innerText = 'جاري الاتصال بالخادم...';
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري طلب الرمز...';
 
             try {
-                const response = await fetch(`${SERVER_URL}/pair?number=${encodeURIComponent(phone)}`);
+                // استبدل الرابط أدناه برابط سيرفرك الخاص بالاقتران
+                const response = await fetch(`/pair?number=${phone}`, {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
                 const data = await response.json();
 
-                if (data.code) {
-                    codeDisplay.innerText = data.code;
-                    resultBox.classList.remove('hidden');
-                } else {
-                    alert(data.error || 'حدث خطأ أثناء الحصول على رمز الاقتران.');
+                if (!response.ok || data.error) {
+                    throw new Error(data.error || 'فشل الحصول على كود الاقتران من السيرفر.');
                 }
-            } catch (err) {
-                alert('تعذر الاتصال بالخادم، يرجى التأكد من تشغيل البوت.');
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i class="fa-solid fa-key"></i> طلب كود الاقتران';
-            }
-        }
 
-        function copyCode() {
-            const code = document.getElementById('codeDisplay').innerText;
-            navigator.clipboard.writeText(code);
-            alert('تم نسخ رمز الاقتران بنجاح!');
-        }
+                if (data.code) {
+                    pairCodeDisplay.innerText = data.code;
+                    codeContainer.style.display = 'block';
+                } else {
+                    showError('لم يتم إرجاع كود اقتران من الخادم، يرجى المحاولة لاحقاً.');
+                }
+
+            } catch (err) {
+                // عرض خطأ الاتصال بالخادم في الصفحة فوراً
+                showError('تعذر الاتصال بالخادم، يرجى التأكد من تشغيل البوت.');
+            } finally {
+                submitBtn.innerText = 'طلب كود الاقتران';
+                submitBtn.disabled = false;
+            }
+        });
     </script>
 
 </body>
