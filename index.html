@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 🟢 تم تغيير العنوان هنا -->
     <title>تنصيب لايت بوت</title>
     <style>
         * {
@@ -105,6 +104,7 @@
             letter-spacing: 4px;
             color: #00ff66;
             margin-bottom: 8px;
+            user-select: all;
         }
 
         .btn {
@@ -150,7 +150,6 @@
 
         <form id="pairForm">
             <div class="input-group">
-                <!-- 🟢 تم تعديل الـ placeholder أدناه -->
                 <input type="tel" id="phoneNumber" placeholder="21894577××××××" required autocomplete="off">
             </div>
 
@@ -172,6 +171,9 @@
     </div>
 
     <script>
+        // 🌐 رابط سيرفرك المباشر في HidenCloud
+        const SERVER_URL = "http://june.hidencloud.com:24638";
+
         const pairForm = document.getElementById('pairForm');
         const phoneNumberInput = document.getElementById('phoneNumber');
         const errorMessage = document.getElementById('errorMessage');
@@ -205,7 +207,8 @@
             submitBtn.disabled = true;
 
             try {
-                const response = await fetch(`/pair?number=${phone}`, {
+                // الاتصال المباشر بالسيرفر عبر الرابط المحدد
+                const response = await fetch(`${SERVER_URL}/pair?number=${phone}`, {
                     method: 'GET',
                     headers: { 'Content-Type': 'application/json' }
                 });
@@ -224,6 +227,7 @@
                 }
 
             } catch (err) {
+                console.error(err);
                 showError('تعذر الاتصال بالخادم، يرجى التأكد من تشغيل البوت.');
             } finally {
                 submitBtn.innerText = 'طلب كود الاقتران';
